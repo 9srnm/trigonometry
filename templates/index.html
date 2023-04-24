@@ -18,11 +18,12 @@
             {% for theme in themes %}
             <div class="task_choose">
                 <h3>{{ theme.name }}:</h3>
-                <input type="number" name="table" value="0" min="0">
+                <input type="number" name="{{ theme.shortname }}" value="0" min="0">
             </div>
             {% endfor %}
         </div>
         <button type="submit">Составить вариант</button>
     </form>
+    <p class="error">{% if error %}Пустой вариант!{% endif %}</p>
 </div>
 {% endblock %}

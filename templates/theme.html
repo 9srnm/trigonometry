@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ theme.name }} |
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <div class="theme" id="{{ theme.shortname }}">
+        <a href="/themes/{{ theme.shortname }}"><h2>{{ theme.name }}</h2></a>
+        <h3>{{ theme.description }}</h3>
+        {% for line in theme.text.split('\n') %}
+            {% if line.startswith('image:') %}
+                <img src="/static/images/{{ line[6:] }}">
+            {% else %}
+                <p>{{ line }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<div class="block">
+    <h2>Задачи на тему «{{ theme.name }}»</h2>
+    <h3>Здесь вы можете посмотреть задачи и ответы к ним</h3>
+    <div class="tasks">
+        {% for task in tasks %}
+            <div class="task">
+                <h3>Задача №{{ loop.index }}</h3>
+                {% for line in task['text'].split('\n') %}
+                    <p>{{ line }}</p>
+                {% endfor %}
+                <h3 class="answer">Ответ: <span>{% if task['answer'] | int != task['answer'] %}{{ task['answer'] }}{% else %}{{ task['answer'] | int }}{% endif %}</span></h3>
+            </div>
+        {% endfor %}
+    </div>
+    <form action="/get_variant" method="get">
+        <input type="number" name="{{ theme.shortname }}" value="{{ tasks|length }}" min="0" style="display: none;">
+        <button type="submit">Проверить себя</button>
+    </form>
+</div>
+{% endblock %}

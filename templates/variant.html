@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Вариант №{{ variant }} |
+{% endblock %}
+
+{% block content %}
+<form action="/result" method="post">
+    <div class="block">
+        <h2>Вариант №{{ variant }}</h2>
+        <h3>Здесь вы можете посмотреть все задачи и ответы к ним</h3>
+        <div class="tasks">
+            <input type="text" name="variant" value="{{ variant }}" style="display: none;">
+            {% for task in tasks %}
+                <div class="task">
+                    <h3>Задача №{{ loop.index }}</h3>
+                    {% for line in task['text'].split('\n') %}
+                        <p>{{ line }}</p>
+                    {% endfor %}
+                    <input type="text" name="{{ loop.index }}" placeholder="Введите ответ">
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit">Проверить</button>
+    </div>
+</form>
+{% endblock %}

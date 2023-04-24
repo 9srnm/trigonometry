@@ -33,6 +33,12 @@ p {
     margin: .5rem 0;
 }
 
+p.error {
+    color: indianred;
+    font-weight: 700;
+    text-align: center;
+}
+
 div.main {
     width: 100%;
     display: flex;
@@ -97,6 +103,8 @@ footer {
 
 div.block {
     margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 div.block:first-of-type {
@@ -168,33 +176,38 @@ div.block > form > div.tasks_choose > div.task_choose:first-child {
     margin-top: 0;
 }
 
-div.block > form > div.tasks_choose > div.task_choose > input {
+input {
     transition: .25s;
     background-color: rgb(32, 32, 36);
     color: #fff;
-    width: 3rem;
+    width: 12rem;
     text-align: center;
     padding: .25rem .5rem;
     border: .1rem solid rgb(128, 128, 160);
     border-radius: 1rem;
 }
 
-div.block > form > div.tasks_choose > div.task_choose > input:focus {
+input:focus {
     transition: .25s;
     border: .1rem solid #fff;
     box-shadow: #fff 0 0 .25rem;
 }
 
-div.block > form > button {
+div.block > form > div.tasks_choose > div.task_choose > input {
+    width: 3rem;
+}
+
+form button[type=submit] {
     transition: .25s;
     margin-top: .5rem;
     padding: 1rem;
     border: .1rem solid #fff;
     background-color: rgb(40, 40, 48);
     border-radius: 1rem;
+    align-self: center;
 }
 
-div.block > form > button:hover {
+form button[type=submit]:hover {
     transition: .25s;
     box-shadow: #fff 0 0 .25rem;
 }
@@ -276,4 +289,29 @@ div.block > div.tasks > div.task > h3.answer:hover > span {
 div.block > div.tasks > div.task > h3.answer > span {
     transition: .25s;
     opacity: 0;
+}
+
+div.block > div.results {
+    display: flex;
+    width: 100%;
+}
+
+div.block > div.results > div.left, div.block > div.results > div.right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+div.block > div.results > div.left > h3 {
+    width: 100%;
+}
+
+div.block > div.results > div.left > h3.correct {
+    background-color: darkgreen;
+}
+
+div.block > div.results > div.left > h3.wrong {
+    background-color: indianred;
 }

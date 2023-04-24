@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Задачи |
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h2>Задачи на каждую тему</h2>
+    <h3>Здесь вы можете посмотреть все задачи и ответы к ним</h3>
+    <div class="tasks">
+        {% for task in tasks %}
+            <div class="task">
+                <h3>Задача на тему «{{ task['theme'] }}»</h3>
+                {% for line in task['text'].split('\n') %}
+                    <p>{{ line }}</p>
+                {% endfor %}
+                <h3 class="answer">Ответ: <span>{% if task['answer'] | int != task['answer'] %}{{ task['answer'] }}{% else %}{{ task['answer'] | int }}{% endif %}</span></h3>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

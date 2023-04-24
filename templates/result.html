@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Результаты | Вариант №{{ variant }} |
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h2>Ваши результаты по варианту №{{ variant }}</h2>
+    <div class="results">
+        <div class="left">
+            <h3><b>Ваш ответ</b></h3>
+            {% for answer in answers %}
+            <h3 class="{% if answer['correct'] %}correct{% else %}wrong{% endif %}">{{ answer['result'] }}</h3>
+            {% endfor %}
+        </div>
+        <div class="right">
+            <h3><b>Правильный ответ</b></h3>
+            {% for task in tasks %}
+            <h3>{{ task.answer }}</h3>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
