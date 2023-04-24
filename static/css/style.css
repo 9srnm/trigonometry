@@ -1,0 +1,279 @@
+@import "nullstyle.css";
+@import "fonts.css";
+
+html {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16pt;
+    color: #fff
+}
+
+body {
+    font-size: 1rem;
+    background: rgb(32, 32, 36);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 700    ;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+p {
+    font-size: 1rem;
+    margin: .5rem 0;
+}
+
+div.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+div.wrapper {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.wrapper > * {
+    width: 100%;
+}
+
+header > div.menu {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background-color: rgb(40, 40, 48);
+    border-radius: 0 0 1rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+header > div.menu > a {
+    transition: .25s;
+    height: 3rem;
+    width: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    color: #fff;
+}
+
+header > div.menu > a:visited {
+    color: #fff;
+}
+
+header > div.menu > a:hover {
+    transition: .25s;
+    color: rgb(128, 128, 160);
+}
+
+header > div.menu > a:first-child {
+    width: 21rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    opacity: .1;
+}
+
+div.block {
+    margin-top: 1.5rem;
+}
+
+div.block:first-of-type {
+    margin-top: 0;
+}
+
+div.block > h2:first-child {
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+div.block > h3:nth-child(2) {
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+div.block > div.themes_choose {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+div.block > div.themes_choose > a {
+    transition: .25s;
+    border: .1rem solid #fff;
+    border-radius: 1rem;
+    height: 3rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    color: #fff;
+    margin: .5rem;
+}
+
+div.block > div.themes_choose > a:visited {
+    color: #fff;
+}
+
+div.block > div.themes_choose > a:hover {
+    transition: .25s;
+    color: rgb(128, 128, 160);
+    border-color: rgb(128, 128, 160);
+}
+
+div.block > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.block > form > div.tasks_choose {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+}
+
+div.block > form > div.tasks_choose > div.task_choose {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: .5rem;
+}
+
+div.block > form > div.tasks_choose > div.task_choose:first-child {
+    margin-top: 0;
+}
+
+div.block > form > div.tasks_choose > div.task_choose > input {
+    transition: .25s;
+    background-color: rgb(32, 32, 36);
+    color: #fff;
+    width: 3rem;
+    text-align: center;
+    padding: .25rem .5rem;
+    border: .1rem solid rgb(128, 128, 160);
+    border-radius: 1rem;
+}
+
+div.block > form > div.tasks_choose > div.task_choose > input:focus {
+    transition: .25s;
+    border: .1rem solid #fff;
+    box-shadow: #fff 0 0 .25rem;
+}
+
+div.block > form > button {
+    transition: .25s;
+    margin-top: .5rem;
+    padding: 1rem;
+    border: .1rem solid #fff;
+    background-color: rgb(40, 40, 48);
+    border-radius: 1rem;
+}
+
+div.block > form > button:hover {
+    transition: .25s;
+    box-shadow: #fff 0 0 .25rem;
+}
+
+div.block > div.theme {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+div.block > div.theme:first-child {
+    margin-top: 0;
+}
+
+div.block > div.theme > h2 {
+    
+}
+
+div.block > div.theme > a {
+    transition: .25s;
+    color: #fff;
+    text-align: center;
+    margin-bottom: .5rem;
+}
+
+div.block > div.theme > a:visited {
+    color: #fff;
+}
+
+div.block > div.theme > a:hover {
+    transition: .25s;
+    color: rgb(128, 128, 160);
+}
+
+div.block > div.theme > h3 {
+    text-align: center;
+    margin: .5rem 0;
+    font-style: italic;
+}
+
+div.block > div.theme > img {
+    display: block;
+    align-self: center;
+    height: 30rem;
+    width: auto;
+}
+
+div.block > div.tasks {
+    display: flex;
+    flex-direction: column;
+}
+
+div.block > div.tasks > div.task {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+}
+
+div.block > div.tasks > div.task:first-child {
+    margin-top: 1.5rem;
+}
+
+div.block > div.tasks > div.task > h3:first-child {
+    margin-bottom: .5rem;
+    font-weight: 700;
+}
+
+div.block > div.tasks > div.task > h3.answer {
+    font-style: italic;
+    cursor: pointer;
+    width: fit-content;
+}
+
+div.block > div.tasks > div.task > h3.answer:hover > span {
+    transition: 1s;
+    opacity: 1;
+}
+
+div.block > div.tasks > div.task > h3.answer > span {
+    transition: .25s;
+    opacity: 0;
+}

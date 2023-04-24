@@ -1,0 +1,38 @@
+﻿Table users {
+  id int [pk, increment, unique, not null]
+  name varchar [unique, not null]
+  pass varchar [not null]
+}
+
+Table themes {
+  id int [pk, increment, unique, not null]
+  name varchar [unique, not null]
+  description varchar [not null]
+  text varchar [not null]
+}
+
+Table tasks {
+  id int [pk, increment, unique, not null]
+  theme int [ref: > themes.id, not null]
+  text varchar [not null]
+  answer float [not null]
+}
+
+Table learned {
+  id int [pk, increment, unique, not null]
+  user int [ref: > users.id, not null]
+  theme int [ref: > themes.id, not null]
+}
+
+Table variants {
+  id int [pk, increment, unique, not null]
+  is_theme boolean [not null]
+  theme int [ref: > themes.id]
+}
+
+Table tasks_in_variants {
+  id int [pk, increment, unique, not null]
+  task int [ref: > tasks.id, not null]
+  variant int [ref: > variants.id, not null]
+  position int [not null]
+}

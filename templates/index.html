@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="block">
+    <h2>Темы по тригонометрии</h2>
+    <h3>Выберите тему, по которой хотите начать подготовку или прорешать задачи</h3>
+    <div class="themes_choose">
+        {% for theme in themes %}
+        <a href="/themes/{{ theme.shortname }}"><h2>{{ theme.name }}</h2></a>
+        {% endfor %}
+    </div>
+</div>
+<div class="block">
+    <h2>Прорешивание задач</h2>
+    <h3>Выберите задачи по темам, которые хотите прорешать</h3>
+    <form action="/get_variant" method="get">
+        <div class="tasks_choose">
+            {% for theme in themes %}
+            <div class="task_choose">
+                <h3>{{ theme.name }}:</h3>
+                <input type="number" name="table" value="0" min="0">
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit">Составить вариант</button>
+    </form>
+</div>
+{% endblock %}

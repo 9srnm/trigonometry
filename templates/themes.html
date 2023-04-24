@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Темы |
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h2>Темы по тригонометрии</h2>
+    <h3>Выберите тему, чтобы перейти к ней</h3>
+    <div class="themes_choose">
+        {% for theme in themes %}
+        <a href="#{{ theme.shortname }}"><h2>{{ theme.name }}</h2></a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="block">
+    {% for theme in themes %}
+        <div class="theme" id="{{ theme.shortname }}">
+            <a href="/themes/{{ theme.shortname }}"><h2>{{ theme.name }}</h2></a>
+            <h3>{{ theme.description }}</h3>
+            {% for line in theme.text.split('\n') %}
+                {% if line.startswith('image:') %}
+                    <img src="/static/images/{{ line[6:] }}">
+                {% else %}
+                    <p>{{ line }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
