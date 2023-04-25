@@ -6,3 +6,5 @@ DB = {
     'host': 'localhost',
     'name': 'db_name'
 }
+
+SECRET_KEY = ''

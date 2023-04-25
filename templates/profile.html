@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Профиль {{ user.name }} |
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <div class="user_info">
+        <h2>{{ user.name }}</h2>
+        <form action="/logout" method="post">
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+</div>
+<div class="block">
+    <h2>Темы по тригонометрии</h2>
+    <h3>Отметьте те из них, которые Вы полностью изучили</h3>
+    <form action="/save" method="post">
+        <div class="themes_check">
+            {% for theme in themes %}
+            <div class="theme">
+                <a href="/themes/{{ theme.shortname }}"><h2>{{ theme.name }}</h2></a>
+                <input type="checkbox" name="{{ theme.shortname }}" {% if theme.id in learned %}checked{% endif %}>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

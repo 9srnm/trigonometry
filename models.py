@@ -1,13 +1,19 @@
 from flask_sqlalchemy import SQLAlchemy
-from main import app
+from flask_login import UserMixin
+from main import app, login_manager
 
 db = SQLAlchemy(app)
 
 
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     name = db.Column(db.String(64), primary_key=False, unique=True, nullable=False)
     password = db.Column(db.String(64), primary_key=False, unique=False, nullable=False)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.where(Users.id == user_id).first()
 
 
 class Themes(db.Model):

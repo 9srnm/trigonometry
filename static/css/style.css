@@ -39,6 +39,49 @@ p.error {
     text-align: center;
 }
 
+input[type=checkbox] {
+    transition: .25s;
+    position: relative;
+      cursor: pointer;
+}
+input[type=checkbox]:before {
+    transition: .25s;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    top: 0;
+    left: 0;
+    background-color: rgb(40, 40, 48);
+}
+input[type=checkbox]:checked:before {
+    transition: .25s;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    top: 0;
+    left: 0;
+    background-color: rgb(128, 128, 160);
+}
+input[type=checkbox]:checked:after {
+    transition: .25s;
+    content: "";
+    display: block;
+    width: .4rem;
+    height: .8rem;
+    border: solid white;
+    border-width: 0 .2rem .2rem 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: .1rem;
+    left: .45rem;
+}
+
 div.main {
     width: 100%;
     display: flex;
@@ -69,7 +112,7 @@ header > div.menu {
     margin-bottom: 1.5rem;
 }
 
-header > div.menu > a {
+header > div.menu > {
     transition: .25s;
     height: 3rem;
     width: 8rem;
@@ -176,30 +219,30 @@ div.block > form > div.tasks_choose > div.task_choose:first-child {
     margin-top: 0;
 }
 
-input {
+input[type=text], input[type=number], input[type=password] {
     transition: .25s;
     background-color: rgb(32, 32, 36);
     color: #fff;
-    width: 12rem;
+    width: 15rem;
     text-align: center;
     padding: .25rem .5rem;
     border: .1rem solid rgb(128, 128, 160);
     border-radius: 1rem;
 }
 
-input:focus {
+input[type=text]:focus, input[type=number]:focus, input[type=password]:focus {
     transition: .25s;
     border: .1rem solid #fff;
     box-shadow: #fff 0 0 .25rem;
 }
 
-div.block > form > div.tasks_choose > div.task_choose > input {
+div.block > form > div.tasks_choose > div.task_choose > input[type=text], div.block > form > div.tasks_choose > div.task_choose > input[type=number], div.block > form > div.tasks_choose > div.task_choose > input[type=password] {
     width: 3rem;
 }
 
 form button[type=submit] {
     transition: .25s;
-    margin-top: .5rem;
+    margin: .5rem 0;
     padding: 1rem;
     border: .1rem solid #fff;
     background-color: rgb(40, 40, 48);
@@ -226,18 +269,18 @@ div.block > div.theme > h2 {
     
 }
 
-div.block > div.theme > a {
+a {
     transition: .25s;
     color: #fff;
     text-align: center;
     margin-bottom: .5rem;
 }
 
-div.block > div.theme > a:visited {
+a:visited {
     color: #fff;
 }
 
-div.block > div.theme > a:hover {
+a:hover {
     transition: .25s;
     color: rgb(128, 128, 160);
 }
@@ -314,4 +357,66 @@ div.block > div.results > div.left > h3.correct {
 
 div.block > div.results > div.left > h3.wrong {
     background-color: indianred;
+}
+
+div.block div.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 15rem;
+    margin-top: 3rem;
+}
+
+div.block div.login > h2 {
+    margin-bottom: .5rem;
+}
+
+div.block > div.user_info {
+    display: flex;
+    justify-self: left;
+    justify-content: end;
+    align-items: center;
+}
+
+div.block > div.user_info > h2 {
+    margin-right: 1.5rem;
+}
+
+div.block div.themes_check {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-self: center;
+}
+
+div.block div.themes_check > div.theme {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+div.block > div.themes_check > div.theme > a {
+    transition: .25s;
+    border: .1rem solid #fff;
+    border-radius: 1rem;
+    height: 3rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    color: #fff;
+    margin: .5rem;
+}
+
+div.block div.themes_check > div.theme > a:visited {
+    color: #fff;
+}
+
+div.block div.themes_check > div.theme > a:hover {
+    transition: .25s;
+    color: rgb(128, 128, 160);
+    border-color: rgb(128, 128, 160);
 }

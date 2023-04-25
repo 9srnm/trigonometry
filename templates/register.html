@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Регистрация |
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <form action="/register" method="post">
+        <div class="login">
+            <h2>Регистрация</h2>
+            {% if error %}<p class="error">Пользователь уже существует, либо длина имени пользователя больше 64, либо одна из ячеек осталась пустой</p>{% endif %}
+            <input type="text" name="username" placeholder="Введите имя пользователя">
+            <input type="password" name="password" placeholder="Введите пароль">
+            <button type="submit">Зарегистрироваться</button>
+            <a href="/login">Уже зарегистрирован</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

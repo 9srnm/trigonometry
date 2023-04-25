@@ -1,12 +1,20 @@
 from config import *
+
 from text import *
+
 from flask import Flask, render_template, request, redirect
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user, AnonymousUserMixin
+
 from sqlalchemy.sql import func
+
+import hashlib
+
 import random
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{DB["username"]}:{DB["password"]}@{DB["host"]}/{DB["name"]}'
-
+app.secret_key = SECRET_KEY
+login_manager = LoginManager(app)
 
 from models import *
 
@@ -124,7 +132,6 @@ def get_variant():
         variant = Variants(is_theme=False)
         db.session.add(variant)
         db.session.commit()
-        variant = Variants.query.order_by(Variants.id.desc()).first()
         for i, task_id in enumerate(tasks_ids):
             task = TasksInVariants(task=task_id, variant=variant.id, position=i + 1)
             db.session.add(task)
@@ -151,3 +158,70 @@ def result():
     tasks = [Tasks.query.where(Tasks.id == task.task).one() for task in TasksInVariants.query.where(TasksInVariants.variant == variant_number).order_by(TasksInVariants.position).all()]
     answers = [{'result': request.form.get(task, type=str), 'correct': request.form.get(task, type=str) and request.form.get(task, type=str).replace(',', '.').count('.') <= 1 and (request.form.get(task, type=str)[0] == '-' and len(request.form.get(task, type=str)) >= 2 and ''.join(request.form.get(task, type=str)[1:].replace(',', '.').split('.')).isdigit() or request.form.get(task, type=str)[0] != '-' and ''.join(request.form.get(task, type=str).replace(',', '.').split('.')).isdigit()) and float(request.form.get(task, type=str).replace(',', '.')) == tasks[i].answer} for i, task in enumerate(tasks_nums)]
     return render_template("result.html", variant=variant_number, tasks=tasks, answers=answers)
+
+
+@app.route('/profile')
+def profile():
+    if current_user.is_authenticated:
+        themes = Themes.query.all()
+        learned = [theme.theme for theme in Learned.query.where(Learned.user == current_user.id).all()]
+        print(learned)
+        return render_template("profile.html", user=current_user, themes=themes, learned=learned)
+    return redirect('/login')
+
+
+@app.route('/save', methods=['POST'])
+@login_required
+def save():
+    learned = Learned.query.where(Learned.user == current_user.id).delete()
+    themes = Themes.query.all()
+    themes_names = [theme.shortname for theme in themes]
+    for theme in request.form.keys():
+        if theme in themes_names:
+            learn = Learned(user=current_user.id, theme=themes[themes_names.index(theme)].id)
+            db.session.add(learn)
+    db.session.commit()
+    return redirect('/profile')
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    username = request.form.get('username')
+    password = request.form.get('password')
+    if username and password:
+        user_query = Users.query.where(Users.name == username)
+        if user_query.count() == 1:
+            user = user_query.one()
+            if hashlib.sha256(password.encode()).hexdigest() == user.password:
+                login_user(user)
+                return redirect('/profile')
+    return render_template("login.html", error=1)
+
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template("register.html")
+    username = request.form.get('username')
+    password = request.form.get('password')
+    if username and password:
+        if len(username) <= 64:
+            existing_user = Users.query.where(Users.name == username)
+            if existing_user.count() == 0:
+                user = Users(name=username, password=hashlib.sha256(password.encode()).hexdigest())
+                db.session.add(user)
+                db.session.commit()
+                login_user(user)
+                return redirect('/profile')
+    return render_template("register.html", error=1)
+
+
+@app.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect('/profile')
